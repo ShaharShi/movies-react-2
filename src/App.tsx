@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-
-import ImageComponent, { IImageProps } from './components/image';
 import CustomHeader from './components/header';
-
 import { data } from "./data"
 import MovieList from './components/movie-list';
 import { IMovie } from './components/movie';
 import Button from 'react-bootstrap/Button';
-import axios from "axios";
-import { getAllByTestId } from '@testing-library/react';
 import Filter from './components/filter';
-
-// jsx element
-
+import MovieForm from './components/form';
 
 const images: Array<any> = [
     { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQGnMVTv0j0SVGZtdxSAh2aulvySNcgLHoqwg&usqp=CAU", height: 200, width: 300 },
@@ -27,7 +20,7 @@ function App() {
     const initialDeletedMovies: Array<any> = []
     const [movies, setMovies] = useState(initialMovies)
     const [deletedMovies, setDeletedMovies] = useState(initialDeletedMovies)
-    // const [getter, setter] = useState(Initial State)
+    const [showForm, setFormVisibility] = useState(false)
 
     function clearMovies() {
         setMovies([])
@@ -42,7 +35,8 @@ function App() {
         setDeletedMovies([...deletedMoviesCopy])
     }
     function addMovie() {
-        setMovies([...movies, data[0]]) //example to show state - data[0] = from FORM
+        setFormVisibility(showForm === true ? false : true)
+        // setMovies([...movies, data[0]]) //example to show state - data[0] = from FORM
     }
 
     function deleteMovie(moovieId: string): void {
@@ -68,14 +62,19 @@ function App() {
 
         <CustomHeader style={{ color: "green" }} text={"Movies"} />
         <div className="row">
-            <Filter filterOperation={filterOperation} />
+            <div className={"col"}>
+                <Filter filterOperation={filterOperation} />
+            </div>
+            <div className={"col text-right"}>
+                <Button onClick={clearMovies} > Clear Movies</Button>
+                <Button onClick={addMovie} > Add movie</Button>
+                <Button onClick={revert} > Revert</Button>
+            </div>
         </div>
         <div className="row">
-            <Button onClick={clearMovies} > clear Movies</Button>
-            <Button onClick={addMovie} > Add movie</Button>
-            <Button onClick={revert} > revert</Button>
+            <MovieForm showForm={showForm}></MovieForm>
         </div>
-        <MovieList noDataMessage="No Data for you firend" movies={moviesAdapter(movies)} />
+        <MovieList noDataMessage="No Data for you friend" movies={moviesAdapter(movies)} />
     </div>
 
     function moviesAdapter(movies: Array<any>): Array<IMovie> {
@@ -86,42 +85,5 @@ function App() {
     }
 
 }
-
-
-
-
-
-
-
-
-interface IProps {
-    images: Array<IImageProps>
-}
-function ImageList(props: IProps): any {
-    const { images } = props
-    return <div>
-        {images.map((imgProps: any) => (<ImageComponent {...imgProps} url={imgProps.src} />))}
-    </div>
-
-}
-
-
-function Details() {
-    return <span> Details component </span>
-}
-
-
-
-
-// return <React.Fragment>
-// <h1> aaa</h1>
-// <h1> aaa</h1>
-// </React.Fragment>
-
-
-//also works
-// function App2() {
-//     return header
-// }
 
 export default App;

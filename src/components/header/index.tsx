@@ -10,5 +10,7 @@ interface IPropsCustomeHeader {
 
 export default function CustomHeader({ text, style = { color: "red" } }: IPropsCustomeHeader) {
     if (!text) return <ErrorComponent />
-    return <h1 style={style}> {text} </h1>
+    return <div className={"jumbotron py-3"}>
+        <h1 style={style}> {text} </h1>
+    </div>
 }

@@ -19,9 +19,7 @@ export interface IMovie {
 }
 export default function Movie(props: IMovie) {
     const showLink = isValidUrl(props.baseAdditionalInfoUrl);
-    // function deleteHandler() {
-    //     props.deleteMovie(props.id)
-    // }
+
     return <Card style={{ width: '18rem' }}>
         <Card.Img variant="top" src={props.poster} />
         <Card.Body>
@@ -29,7 +27,7 @@ export default function Movie(props: IMovie) {
             <Card.Text>
                 {props.year}
             </Card.Text>
-            {showLink && <Card.Link href={`${props.baseAdditionalInfoUrl}/${props.id}`}>Go To</Card.Link>}
+            {showLink && <Card.Link href={`${props.baseAdditionalInfoUrl}/${props.id}`}>Go To IMDb</Card.Link>}
             <Rank stars={props.rate} />
             <Button onClick={() => props.deleteMovie(props.id)} variant="danger"><Trash2 /></Button>
         </Card.Body>
