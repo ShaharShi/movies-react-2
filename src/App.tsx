@@ -21,7 +21,6 @@ function App() {
     const [movies, setMovies] = useState(initialMovies)
     const [deletedMovies, setDeletedMovies] = useState(initialDeletedMovies)
     const [showForm, setFormVisibility] = useState(false)
-    const [newMovie, setNewMovie] = useState({})
 
     function clearMovies() {
         setMovies([])
@@ -58,7 +57,7 @@ function App() {
 
     function filterOperation(value: string) {
         if (!value) return setMovies(data);
-        const filteredMovies = data.filter(movie => movie.Title.toLowerCase().includes(value))
+        const filteredMovies = movies.filter(movie => movie.Title.toLowerCase().includes(value))
         setMovies(filteredMovies)
     }
     return <div className="container">

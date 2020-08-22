@@ -1,5 +1,5 @@
 import React from "react"
-import "./index.css";
+import styles from "./style.module.css";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Trash2 } from 'react-bootstrap-icons';
@@ -20,7 +20,7 @@ export interface IMovie {
 export default function Movie(props: IMovie) {
     const showLink = isValidUrl(props.baseAdditionalInfoUrl);
 
-    return <Card style={{ width: '18rem' }}>
+    return <Card className={styles.cardItem} style={{ width: '18rem' }}>
         <Card.Img variant="top" src={props.poster} />
         <Card.Body>
             <Card.Title>{props.title}</Card.Title>

@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/esm/Col';
 import Rank from '../rank';
 import Dropdown from 'react-bootstrap/Dropdown';
+import styles from './style.module.css'
 
 interface IProps {
     newMovie: Function,
@@ -19,6 +20,7 @@ export default function MovieForm(props: IProps) {
         rank: 0,
         imdbID: "",
         Year: "",
+        Type: "",
     }
     const [formProps, setNewProp] = useState(state)
 
@@ -38,7 +40,7 @@ export default function MovieForm(props: IProps) {
 
     if (!showForm) return <React.Fragment></React.Fragment>;
     return (
-        <Form onSubmit={(e) => {handleSubmit(e)}} className={`w-100 my-3 p-3 bg-light`}>
+        <Form onSubmit={(e) => {handleSubmit(e)}} className={`${styles.movieForm} w-100 my-3 p-3 bg-light`}>
             <Form.Row>
                 <Col>
                     <Form.Label>Movie Name</Form.Label>
@@ -69,7 +71,11 @@ export default function MovieForm(props: IProps) {
                     <Form.Label>Release Year</Form.Label>
                     <Form.Control onChange={handleInputChange} name={"Year"}/>
                 </Col>
-                <Col className={"d-flex align-items-end justify-content-center"}>
+                <Col>
+                    <Form.Label>Type</Form.Label>
+                    <Form.Control onChange={handleInputChange} name={"Type"} placeholder={"Movie, Series ..."}/>
+                </Col>
+                <Col className={"d-flex align-items-end"}>
                     <Button type={'submit'} className={"w-100"} >Submit</Button>
                 </Col>
             </Form.Row>

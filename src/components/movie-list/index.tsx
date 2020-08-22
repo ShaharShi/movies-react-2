@@ -7,13 +7,11 @@ interface IProps {
     movies: Array<IMovie>
     noDataMessage?: string;
 }
-// movies: Array<Partial<IMovie>>
 
 export default function MovieList(props: IProps) {
-    console.log("Component MovieList rendered")
     const { movies, noDataMessage = "No Data" } = props
     if (!movies.length) return <h1> {noDataMessage}</h1>
-    return <div className={css.bgMovies + " row"}>
+    return <div className={`${css.bgMovies} row justify-content-between`}>
         {movies.map((movie, ind) => { return <Movie key={movie.id + ind} {...movie} /> })}
     </div>
 }  
