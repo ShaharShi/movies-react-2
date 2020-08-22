@@ -6,24 +6,47 @@ import Rank from '../rank';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 interface IProps {
+    newMovie: Function,
     showForm: boolean,
 }
 
 export default function MovieForm(props: IProps) {
-    const { showForm } = props
+    const { showForm, newMovie } = props
     const numOfStarsArr = new Array(5).fill(true, 0)
+    const state = {
+        Title: "",
+        Poster: "",
+        rank: 0,
+        imdbID: "",
+        Year: "",
+    }
+    const [formProps, setNewProp] = useState(state)
 
-    if (!showForm) return <React.Fragment></React.Fragment>
+    function handleSelect(e: any) {
+        setNewProp({...formProps, rank: Number(e)})
+    }
+    function handleInputChange(e: any) {
+        const { target } = e;
+        const { name , value } = target;
+        setNewProp({...formProps, [name]: value})
+    }
+    
+    function handleSubmit(e: any) {
+        e.preventDefault()
+        newMovie(formProps)
+    }
+
+    if (!showForm) return <React.Fragment></React.Fragment>;
     return (
-        <Form className={`w-100 my-3 p-3 bg-light`}>
+        <Form onSubmit={(e) => {handleSubmit(e)}} className={`w-100 my-3 p-3 bg-light`}>
             <Form.Row>
                 <Col>
                     <Form.Label>Movie Name</Form.Label>
-                    <Form.Control />
+                    <Form.Control onChange={handleInputChange} name={"Title"}/>
                 </Col>
                 <Col>
                     <Form.Label>Poster Image</Form.Label>
-                    <Form.Control placeholder="Insert Full URL" />
+                    <Form.Control onChange={handleInputChange} name={"Poster"} placeholder="Insert Full URL" />
                 </Col>
                 <Col>
                     <Form.Label>Rate The Movie</Form.Label>
@@ -32,7 +55,7 @@ export default function MovieForm(props: IProps) {
                             Rate By Star 
                         </Dropdown.Toggle>
                         <Dropdown.Menu className={"w-100"}>
-                            {numOfStarsArr.map((_, i) => { return <Dropdown.Item><Rank stars={i + 1} paintStarOption={false}/></Dropdown.Item>})}
+                            {numOfStarsArr.map((_, i) => { return <Dropdown.Item onSelect={(e: any) => {handleSelect(e)}} value={i + 1} eventKey={`${i + 1}`}><Rank stars={i + 1} paintStarOption={false}/></Dropdown.Item>})}
                         </Dropdown.Menu>
                     </Dropdown>
                 </Col>
@@ -40,14 +63,14 @@ export default function MovieForm(props: IProps) {
             <Form.Row>
                 <Col>
                     <Form.Label>IMDb ID</Form.Label>
-                    <Form.Control/>
+                    <Form.Control onChange={handleInputChange} name={"imdbID"}/>
                 </Col>
                 <Col>
                     <Form.Label>Release Year</Form.Label>
-                    <Form.Control />
+                    <Form.Control onChange={handleInputChange} name={"Year"}/>
                 </Col>
                 <Col className={"d-flex align-items-end justify-content-center"}>
-                    <Button className={"w-100"}>Submit</Button>
+                    <Button type={'submit'} className={"w-100"} >Submit</Button>
                 </Col>
             </Form.Row>
         </Form>

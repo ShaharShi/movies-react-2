@@ -21,9 +21,13 @@ function App() {
     const [movies, setMovies] = useState(initialMovies)
     const [deletedMovies, setDeletedMovies] = useState(initialDeletedMovies)
     const [showForm, setFormVisibility] = useState(false)
+    const [newMovie, setNewMovie] = useState({})
 
     function clearMovies() {
         setMovies([])
+    }
+    function formVisibility() {
+        setFormVisibility(showForm === true ? false : true)
     }
 
     function revert() {
@@ -34,9 +38,8 @@ function App() {
         setMovies([...movies, getLastRevertMovie])
         setDeletedMovies([...deletedMoviesCopy])
     }
-    function addMovie() {
-        setFormVisibility(showForm === true ? false : true)
-        // setMovies([...movies, data[0]]) //example to show state - data[0] = from FORM
+    function addMovie(newMovieObject: Object) {
+        setMovies([newMovieObject, ...movies])
     }
 
     function deleteMovie(moovieId: string): void {
@@ -67,12 +70,12 @@ function App() {
             </div>
             <div className={"col text-right"}>
                 <Button onClick={clearMovies} > Clear Movies</Button>
-                <Button onClick={addMovie} > Add movie</Button>
+                <Button onClick={formVisibility} > Add movie</Button>
                 <Button onClick={revert} > Revert</Button>
             </div>
         </div>
         <div className="row">
-            <MovieForm showForm={showForm}></MovieForm>
+            <MovieForm showForm={showForm} newMovie={addMovie}></MovieForm>
         </div>
         <MovieList noDataMessage="No Data for you friend" movies={moviesAdapter(movies)} />
     </div>
