@@ -6,6 +6,7 @@ import FormControl from 'react-bootstrap/FormControl';
 interface IProps {
     filterOperation: Function
 }
+
 export default function Filter(props: IProps) {
     const [filterValue, setFilterValue] = useState("")
     const { filterOperation } = props;
@@ -18,8 +19,8 @@ export default function Filter(props: IProps) {
                 onChange={(e) => setFilterValue(e.target.value)}
                 value={filterValue}
             />
-            <Button onClick={() => { filterOperation(filterValue) }}> Filter </Button>
-            <Button onClick={() => {
+            <Button className={"mr-2"} onClick={() => { filterOperation(filterValue) }}> Filter </Button>
+            <Button className={"mr-2"} onClick={() => {
                 setFilterValue("");
                 filterOperation("")
             }}> Clear </Button>

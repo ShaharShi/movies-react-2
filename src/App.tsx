@@ -7,6 +7,8 @@ import { IMovie } from './components/movie';
 import Button from 'react-bootstrap/Button';
 import Filter from './components/filter';
 import MovieForm from './components/form';
+import AppConfiguration from './components/configuration';
+import { GearFill } from 'react-bootstrap-icons';
 
 const images: Array<any> = [
     { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQGnMVTv0j0SVGZtdxSAh2aulvySNcgLHoqwg&usqp=CAU", height: 200, width: 300 },
@@ -21,12 +23,17 @@ function App() {
     const [movies, setMovies] = useState(initialMovies)
     const [deletedMovies, setDeletedMovies] = useState(initialDeletedMovies)
     const [showForm, setFormVisibility] = useState(false)
+    const [showConfig, setAppConfigVisibility] = useState(false)
+    const [appTheme, setAppTheme ] = useState("black");
 
     function clearMovies() {
         setMovies([])
     }
     function formVisibility() {
         setFormVisibility(showForm === true ? false : true)
+    }
+    function appConfigVisibility() {
+        setAppConfigVisibility(showConfig === true ? false : true)
     }
 
     function revert() {
@@ -51,7 +58,6 @@ function App() {
             const index = movies.findIndex(m => m.imdbID === moovieId);
             const movie = movies.find(m => m.imdbID === moovieId);
             return [index, movie]
-
         }
     }
 
@@ -63,20 +69,24 @@ function App() {
     return <div className="container">
 
         <CustomHeader style={{ color: "green" }} text={"Movies"} />
-        <div className="row">
-            <div className={"col"}>
+        <div className="row my-3">
+            <div className={"col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12"}>
                 <Filter filterOperation={filterOperation} />
             </div>
-            <div className={"col text-right"}>
-                <Button onClick={clearMovies} > Clear Movies</Button>
-                <Button onClick={formVisibility} > Add movie</Button>
-                <Button onClick={revert} > Revert</Button>
+            <div className={"col-xl-6 col-lg-6 col-md-6 col-sm-10 col-10 text-center"}>
+                <Button className={"mr-2"} onClick={clearMovies} > Clear Movies</Button>
+                <Button className={"mr-2"} onClick={formVisibility} > Add movie</Button>
+                <Button className={"mr-2"} onClick={revert} > Revert</Button>
+            </div>
+            <div className={"col-xl-1 col-lg-1 col-md-1 col-sm-2 col-1 text-right"}>
+                <Button variant={"danger"} onClick={appConfigVisibility}><GearFill size={"22px"}></GearFill></Button>
             </div>
         </div>
         <div className="row">
+            <AppConfiguration showConfig={showConfig} setAppTheme={setAppTheme}></AppConfiguration>
             <MovieForm showForm={showForm} newMovie={addMovie}></MovieForm>
         </div>
-        <MovieList noDataMessage="No Data for you friend" movies={moviesAdapter(movies)} />
+        <MovieList noDataMessage="No Data for you friend" movies={moviesAdapter(movies)} appTheme={appTheme} />
     </div>
 
     function moviesAdapter(movies: Array<any>): Array<IMovie> {

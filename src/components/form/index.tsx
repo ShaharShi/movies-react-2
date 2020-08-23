@@ -36,6 +36,7 @@ export default function MovieForm(props: IProps) {
     function handleSubmit(e: any) {
         e.preventDefault()
         newMovie(formProps)
+        setNewProp(state)
     }
 
     if (!showForm) return <React.Fragment></React.Fragment>;

@@ -19,16 +19,17 @@ export interface IMovie {
 }
 export default function Movie(props: IMovie) {
     const showLink = isValidUrl(props.baseAdditionalInfoUrl);
+    const defaultPoster = "https://www.brdtex.com/wp-content/uploads/2019/09/no-image-480x480.png"
 
     return <Card className={styles.cardItem} style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={props.poster} />
+        <Card.Img variant="top" height={'400px'} src={props.poster || defaultPoster} />
         <Card.Body>
             <Card.Title>{props.title}</Card.Title>
             <Card.Text>
                 {props.year}
             </Card.Text>
             {showLink && <Card.Link href={`${props.baseAdditionalInfoUrl}/${props.id}`}>Go To IMDb</Card.Link>}
-            <Rank stars={props.rate} />
+            <Rank stars={props.rate} paintStarOption={true}/>
             <Button onClick={() => props.deleteMovie(props.id)} variant="danger"><Trash2 /></Button>
         </Card.Body>
     </Card>
