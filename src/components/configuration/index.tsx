@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/esm/Col';
 import Button from 'react-bootstrap/esm/Button';
@@ -8,32 +8,41 @@ interface IProps {
     setAppTheme: Function
 }
 
-export default function AppConfiguration(props: IProps){
-    const { showConfig, setAppTheme } = props;
-    const [colorValue, setColorValue] = useState("")
+export default class AppConfiguration extends Component< IProps, any >  {
 
-    function handleInputChange(e: any) {
+    constructor(props: IProps) {
+        super(props)
+        this.state = {
+            colorValue: ""
+        };
+    }
+    
+    handleInputChange(e: any) {
         const { target } = e;
-        setColorValue(target.value)
+        this.setState({
+            colorValue: target.value
+        })
     }
-    function handleSubmit() {
-        setAppTheme(colorValue)
+    handleSubmit() {
+        this.props.setAppTheme(this.state.colorValue)
     }
-
-    if (!showConfig) return <React.Fragment></React.Fragment>
-    return (
-        <div className={"w-100 my-3 p-3 bg-light"}>
-            <Form>
-                <Form.Row>
-                    <Col>
-                        <Form.Label>Write a Color for App Theme</Form.Label>
-                        <Form.Control onChange={(e) => {handleInputChange(e)}} name={"confColor"} placeholder={"red, greenyellow, rgb(0,0,0), #ffffff etc..."}/>
-                    </Col>
-                    <Col className={"d-flex align-items-end"}>
-                        <Button onClick={handleSubmit} variant={"success"}>Submit</Button>
-                    </Col>
-                </Form.Row>
-            </Form>
-        </div>
-    )
+    
+    render() {
+        if (!this.props.showConfig) return <React.Fragment></React.Fragment>
+        return (
+            <div className={"w-100 my-3 p-3 bg-light"}>
+                <Form>
+                    <Form.Row>
+                        <Col>
+                            <Form.Label>Write a Color for App Theme</Form.Label>
+                            <Form.Control onChange={(e) => {this.handleInputChange(e)}} name={"confColor"} placeholder={"red, greenyellow, rgb(0,0,0), #ffffff etc..."}/>
+                        </Col>
+                        <Col className={"d-flex align-items-end"}>
+                            <Button onClick={this.handleSubmit.bind(this)} variant={"success"}>Submit</Button>
+                        </Col>
+                    </Form.Row>
+                </Form>
+            </div>
+        )
+    }
 }

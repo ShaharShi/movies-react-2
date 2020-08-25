@@ -1,5 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 
-export default function ErrorComponent() {
-    return <h1 style={{ color: "red" }}> Missing text </h1>
+
+export default class ErrorComponent extends Component {
+
+    render() {
+        return (
+            <h1 style={{ color: "red" }}> Missing text </h1>
+        )
+    }
 }

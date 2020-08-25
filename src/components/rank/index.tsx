@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, Component } from "react"
 import { StarFill } from 'react-bootstrap-icons';
 
 
@@ -12,16 +12,29 @@ enum StarColors {
     secondary = "blue"
 }
 
-export default function Rank(props: IProps) {
-    const [starColor, setStarColor] = useState(StarColors.primary)
+export default class Rank extends Component < IProps, any > {
 
-    function changeStartsColor() {
-        if(!props.paintStarOption) return;
-        const color = starColor === StarColors.primary ? StarColors.secondary : StarColors.primary
-        setStarColor(color)
+    constructor(props: IProps) {
+        super(props)
+        this.state = {
+            starColor: StarColors.primary
+        }
     }
-    const numberOfStars = new Array(props.stars).fill(true, 0)
-    return <div>
-        {numberOfStars.map((_, index) => <StarFill key={index} fill={starColor} onClick={changeStartsColor} />)}
-    </div>
-} 
+
+    changeStartsColor() {
+        if(!this.props.paintStarOption) return;
+        const color = this.state.starColor === StarColors.primary ? StarColors.secondary : StarColors.primary
+        this.setState({
+            starColor: color
+        })
+    }
+
+    numberOfStars = new Array(this.props.stars).fill(true, 0)
+    render() {
+        return (
+        <div>
+            {this.numberOfStars.map((_, index) => <StarFill key={index} fill={this.state.starColor} onClick={this.changeStartsColor.bind(this)} />)}
+        </div>
+        )
+    }
+}
