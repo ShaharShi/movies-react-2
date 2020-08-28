@@ -33,7 +33,7 @@ export const data = [
     Type: "movie",
     Poster:
       "https://m.media-amazon.com/images/M/MV5BOGZmYzVkMmItM2NiOS00MDI3LWI4ZWQtMTg0YWZkODRkMmViXkEyXkFqcGdeQXVyODY0NzcxNw@@._V1_SX300.jpg",
-    rank: 4,
+    rank: 2,
   },
   {
     Title: "Batman Forever",
@@ -63,13 +63,13 @@ export const data = [
     rank: 4,
   },
   {
-    Title: "Batman: The Animated Series",
-    Year: "1992–1995",
-    imdbID: "tt0103359",
-    Type: "series",
+    Title: "Shazam!",
+    Year: "2019",
+    imdbID: "tt0448115",
+    Type: "movie",
     Poster:
-      "https://m.media-amazon.com/images/M/MV5BMjFiNzk3NzctY2E0OS00NTVkLThlMDUtODVlNmRmZWI1ZjMzXkEyXkFqcGdeQXVyNTQ0NjQzNTE@._V1_SX300.jpg",
-    rank: 4,
+      "https://m.media-amazon.com/images/M/MV5BYTE0Yjc1NzUtMjFjMC00Y2I3LTg3NGYtNGRlMGJhYThjMTJmXkEyXkFqcGdeQXVyNTI4MzE4MDU@._V1_SX300.jpg",
+    rank: 1,
   },
   {
     Title: "Batman: Under the Red Hood",
@@ -88,5 +88,68 @@ export const data = [
     Poster:
       "https://m.media-amazon.com/images/M/MV5BMzIxMDkxNDM2M15BMl5BanBnXkFtZTcwMDA5ODY1OQ@@._V1_SX300.jpg",
     rank: 4,
+  },
+  {
+    Title: "The Amazing Spider-Man",
+    Year: "2012",
+    imdbID: "tt0948470",
+    Type: "movie",
+    Poster:
+      "https://m.media-amazon.com/images/M/MV5BMjMyOTM4MDMxNV5BMl5BanBnXkFtZTcwNjIyNzExOA@@._V1_SX300.jpg",
+    rank: 5,
+  },
+  {
+    Title: "Ant-Man",
+    Year: "2015",
+    imdbID: "tt0478970",
+    Type: "movie",
+    Poster:
+      "https://m.media-amazon.com/images/M/MV5BMjM2NTQ5Mzc2M15BMl5BanBnXkFtZTgwNTcxMDI2NTE@._V1_SX300.jpg",
+    rank: 2,
+  },
+  {
+    Title: "The Avengers",
+    Year: "2012",
+    imdbID: "tt0848228",
+    Type: "movie",
+    Poster:
+    "https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
+    rank: 3,
+  },
+  {
+    Title: "Wonder Woman",
+    Year: "2017",
+    imdbID: "tt0451279",
+    Type: "movie",
+    Poster:
+    "https://m.media-amazon.com/images/M/MV5BNDFmZjgyMTEtYTk5MC00NmY0LWJhZjktOWY2MzI5YjkzODNlXkEyXkFqcGdeQXVyMDA4NzMyOA@@._V1_SX300.jpg",
+    rank: 5,
+  },
+  {
+    Title: "Justice League",
+    Year: "2017",
+    imdbID: "tt0974015",
+    Type: "movie",
+    Poster:
+    "https://m.media-amazon.com/images/M/MV5BYWVhZjZkYTItOGIwYS00NmRkLWJlYjctMWM0ZjFmMDU4ZjEzXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
+    rank: 3,
+  },
+  {
+    Title: "Aquaman",
+    Year: "2018",
+    imdbID: "tt1477834",
+    Type: "movie",
+    Poster:
+    "https://m.media-amazon.com/images/M/MV5BOTk5ODg0OTU5M15BMl5BanBnXkFtZTgwMDQ3MDY3NjM@._V1_SX300.jpg",
+    rank: 1,
+  },
+  {
+    Title: "The Dark Knight Rises",
+    Year: "2012",
+    imdbID: "tt1345836",
+    Type: "movie",
+    Poster:
+    "https://m.media-amazon.com/images/M/MV5BMTk4ODQzNDY3Ml5BMl5BanBnXkFtZTcwODA0NTM4Nw@@._V1_SX300.jpg",
+    rank: 3,
   },
 ];

@@ -9,22 +9,29 @@ import Filter from './components/filter';
 import MovieForm from './components/form';
 import AppConfiguration from './components/configuration';
 import { GearFill } from 'react-bootstrap-icons';
+import Statistics from './components/statistics';
+import Navbar from './components/navbar';
 
-const images: Array<any> = [
-    { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQGnMVTv0j0SVGZtdxSAh2aulvySNcgLHoqwg&usqp=CAU", height: 200, width: 300 },
-    { src: "https://media.wired.com/photos/5c6750d23e8add2cdb91724f/125:94/w_2393,h_1800,c_limit/shark-551025353.jpg", height: 300, width: 500 },
-    { src: "", height: 200, width: 300 }
-]
+const appConfiguration = {
+    startTheme: 'black',
+    starRateNumber: 5,
+    startPage: 'movies',
+    formOnStart: false,
+    themeConfigOnStart: false,
+}
 
 // create function element
 function App() {
+    const { startTheme, starRateNumber, startPage, formOnStart, themeConfigOnStart } = appConfiguration
+
     const initialMovies: Array<any> = data;
     const initialDeletedMovies: Array<any> = []
     const [movies, setMovies] = useState(initialMovies)
     const [deletedMovies, setDeletedMovies] = useState(initialDeletedMovies)
-    const [showForm, setFormVisibility] = useState(false)
-    const [showConfig, setAppConfigVisibility] = useState(false)
-    const [appTheme, setAppTheme ] = useState("black");
+    const [showForm, setFormVisibility] = useState(formOnStart)
+    const [showConfig, setAppConfigVisibility] = useState(themeConfigOnStart)
+    const [showPage, setPageToShow] = useState(startPage)
+    const [appTheme, setAppTheme ] = useState(startTheme);
 
     function clearMovies() {
         setMovies([])
@@ -67,18 +74,18 @@ function App() {
         setMovies(filteredMovies)
     }
     return <div className="container">
-
         <CustomHeader style={{ color: "green" }} text={"Movies"} />
+        <Navbar setPageToShow={setPageToShow}/>
         <div className="row my-3">
-            <div className={"col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12"}>
+            <div className={"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12"}>
                 <Filter filterOperation={filterOperation} />
             </div>
-            <div className={"col-xl-6 col-lg-6 col-md-6 col-sm-10 col-10 text-center"}>
+            <div className={"col-xl-5 col-lg-5 col-md-8 col-sm-8 col-8 text-center"}>
                 <Button className={"mr-2"} onClick={clearMovies} > Clear Movies</Button>
                 <Button className={"mr-2"} onClick={formVisibility} > Add movie</Button>
                 <Button className={"mr-2"} onClick={revert} > Revert</Button>
             </div>
-            <div className={"col-xl-1 col-lg-1 col-md-1 col-sm-2 col-1 text-right"}>
+            <div className={"col-xl-2 col-lg-2 col-md-4 col-sm-4 col-4 text-right"}>
                 <Button variant={"danger"} onClick={appConfigVisibility}><GearFill size={"22px"}></GearFill></Button>
             </div>
         </div>
@@ -86,7 +93,8 @@ function App() {
             <AppConfiguration showConfig={showConfig} setAppTheme={setAppTheme}></AppConfiguration>
             <MovieForm showForm={showForm} newMovie={addMovie}></MovieForm>
         </div>
-        <MovieList noDataMessage="No Data for you friend" movies={moviesAdapter(movies)} appTheme={appTheme} />
+        <Statistics data={movies} starRateNumber={ starRateNumber } showPage={showPage}/>
+        <MovieList noDataMessage="No Data for you friend" movies={moviesAdapter(movies)} appTheme={appTheme} showPage={showPage} />
     </div>
 
     function moviesAdapter(movies: Array<any>): Array<IMovie> {

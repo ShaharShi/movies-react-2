@@ -1,0 +1,12 @@
+.navBar {
+    position: fixed;
+    top: 190px;
+    left: 0;
+    width: 170px;
+    padding: 20px 15px;
+}
+
+.navBar_button {
+    width: 90%;
+    margin-bottom: 10px;
+}

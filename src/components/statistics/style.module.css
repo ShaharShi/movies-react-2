@@ -1,0 +1,27 @@
+.statisticsWrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px 5px;
+}
+
+.statisticsInner {
+    width: 40%;
+    text-align: center;
+}
+
+.statisticsItem {
+    width: auto;
+    padding: 20px 0;
+    line-height: 52px;
+    border-bottom: 1px solid rgb(200, 200, 200);
+}
+.statisticsValue {
+    padding: 5px 30px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    font-family: monospace;
+    background: rgb(201, 201, 201);
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
