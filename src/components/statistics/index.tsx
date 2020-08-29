@@ -12,10 +12,10 @@ export default function Statistics(props: IProps) {
     const { data, starRateNumber, showPage } = props;
 
     const numberOfStars: Array < any > = new Array(starRateNumber).fill(true, 0)
-    const releaseYear: string | number = commonReleaseYear(data)
-    const mostRated: string = highestRank(data)
-    const newestMovie: string = oldestOrNewestMovie(data, true)
-    const oldestMovie: string = oldestOrNewestMovie(data, false)
+    const releaseYear: string | number  = commonReleaseYear(data)
+    const mostRated: string  = highestRank(data)
+    const newestMovie: string  = oldestOrNewestMovie(data, true)
+    const oldestMovie: string  = oldestOrNewestMovie(data, false)
 
     if(showPage.toLowerCase() !== 'statistics') return null;
     return (
@@ -47,7 +47,7 @@ export default function Statistics(props: IProps) {
                     return (
                     <div key={i} className={styles.statisticsItem}>
                         <h5><Rank stars={i + 1} paintStarOption={false}/></h5>
-                        <span className={styles.statisticsValue}>{findMoviesRate(data, (i + 1))} Movies</span>
+                        <span className={styles.statisticsValue}>{findMoviesRate(data, (i + 1))}</span>
                     </div>
                 )})}
             </div>
@@ -55,6 +55,7 @@ export default function Statistics(props: IProps) {
     )
 
     function commonReleaseYear(data: Array< Object >) {
+        if(!data.length) return 'No Data';
         const countYears: any = data.reduce((acc: any, { Year }: any) => {
             acc[Year] = (acc[Year] || 0) + 1;
             return acc;
@@ -65,12 +66,14 @@ export default function Statistics(props: IProps) {
     }
     
     function highestRank(data: Array < any >) {
+        if(!data.length) return 'No Data';
         const ranks: any = data.map((movie: any) => { return movie.rank })
         const mostRatedMovie = data.filter((movie) => movie.rank === Math.max(...ranks)).map(ratedMovie => { return ratedMovie.Title})
         return mostRatedMovie[Math.floor(Math.random() * mostRatedMovie.length)]
     }
     
     function oldestOrNewestMovie(data: Array < any >, newest: boolean) {
+        if(!data.length) return 'No Data';
         const arrOfYears: any = data.map(movie => { return Number(movie.Year) })
         const result = data.filter(movie => {
              return newest ? Number(movie.Year) === Math.max(...arrOfYears) : Number(movie.Year) === Math.min(...arrOfYears);
@@ -80,7 +83,7 @@ export default function Statistics(props: IProps) {
     }
     function findMoviesRate(data: any, i: number) {
         const numOfMovies: any = data.filter((movie: any) => movie.rank === i)
-        return numOfMovies.length;
+        return !numOfMovies.length ? 'No Data' : `${numOfMovies.length} Movies`;
     }
 
 }
